@@ -50,4 +50,35 @@ public class ChatController {
         ChatDto chatDto = chatService.getChatById(chatId, user.getId());
         return ResponseEntity.ok(chatDto);
     }
+
+    @PostMapping("/{chatId}/members/{memberId}")
+    public ResponseEntity<ChatDto> addMember(@PathVariable Long chatId,
+                                              @PathVariable Long memberId,
+                                              Authentication authentication) {
+        User user = userRepository.findByUsername(authentication.getName())
+            .orElseThrow(() -> new RuntimeException("User not found"));
+
+        ChatDto chatDto = chatService.addMember(chatId, memberId, user.getId());
+        return ResponseEntity.ok(chatDto);
+    }
+
+    @DeleteMapping("/{chatId}/members/{memberId}")
+    public ResponseEntity<ChatDto> removeMember(@PathVariable Long chatId,
+                                                 @PathVariable Long memberId,
+                                                 Authentication authentication) {
+        User user = userRepository.findByUsername(authentication.getName())
+            .orElseThrow(() -> new RuntimeException("User not found"));
+
+        ChatDto chatDto = chatService.removeMember(chatId, memberId, user.getId());
+        return ResponseEntity.ok(chatDto);
+    }
+
+    @DeleteMapping("/{chatId}")
+    public ResponseEntity<Void> deleteChat(@PathVariable Long chatId, Authentication authentication) {
+        User user = userRepository.findByUsername(authentication.getName())
+            .orElseThrow(() -> new RuntimeException("User not found"));
+
+        chatService.deleteChat(chatId, user.getId());
+        return ResponseEntity.noContent().build();
+    }
 }
