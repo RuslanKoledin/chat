@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: messenger-postgres
+    environment:
+      POSTGRES_DB: messenger_db
+      POSTGRES_USER: messenger_user
+      POSTGRES_PASSWORD: messenger_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - messenger-network
+
+volumes:
+  postgres_data:
+
+networks:
+  messenger-network:
+    driver: bridge
