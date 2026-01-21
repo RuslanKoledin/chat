@@ -33,4 +33,13 @@ public class UserService {
             .orElseThrow(() -> new RuntimeException("User not found"));
         return UserDto.fromEntity(user);
     }
+
+    public List<UserDto> searchUsers(String searchTerm) {
+        if (searchTerm == null || searchTerm.trim().isEmpty()) {
+            return getAllUsers();
+        }
+        return userRepository.searchUsers(searchTerm.trim()).stream()
+            .map(UserDto::fromEntity)
+            .collect(Collectors.toList());
+    }
 }

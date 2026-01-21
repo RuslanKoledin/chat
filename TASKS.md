@@ -5,21 +5,35 @@
 ### Task 1.1: Поиск сотрудников
 **Приоритет:** HIGH
 **Пункт ТЗ:** п.4.1.1
-**Статус:** ❌ TODO
+**Статус:** ✅ COMPLETED
 
-**Описание:** Добавить поиск по ФИО и логину при создании чата
+**Описание:** Добавить поиск по ФИО, логину, email и отделу при создании чата
 
 **Subtasks:**
-- [ ] Backend: добавить endpoint `GET /api/users/search?query={term}`
-- [ ] Backend: реализовать поиск по `fullName` и `username` (LIKE)
-- [ ] Frontend: добавить поле поиска в `NewChatModal.tsx`
-- [ ] Frontend: debounce для запросов поиска
-- [ ] Тестирование: проверить поиск по частичному совпадению
+- [x] Backend: добавить endpoint `GET /api/users/search?query={term}`
+- [x] Backend: реализовать поиск по `fullName`, `username`, `email`, `department` (LIKE)
+- [x] Frontend: добавить поле поиска в `NewChatModal.tsx`
+- [x] Frontend: debounce для запросов поиска (300ms)
+- [x] Frontend: добавить поиск в панель добавления участников `ChatWindow.tsx`
+- [x] Frontend: отображение username в результатах поиска
+- [x] Frontend: индикатор загрузки во время поиска
+- [x] Frontend: сообщение "Пользователи не найдены"
 
-**Файлы:**
+**Реализовано:**
+- Backend endpoint с поиском по 4 полям
+- Debounce 300ms - как в Telegram/WhatsApp
+- Поиск работает в NewChatModal и в панели добавления участников
+- Красивый UI с spinner и подсветкой username
+
+**Файлы изменены:**
 - `messenger-backend/src/main/java/com/company/messenger/controller/UserController.java`
 - `messenger-backend/src/main/java/com/company/messenger/repository/UserRepository.java`
+- `messenger-backend/src/main/java/com/company/messenger/service/UserService.java`
+- `messenger-frontend/src/api/userApi.ts`
 - `messenger-frontend/src/components/NewChatModal.tsx`
+- `messenger-frontend/src/components/NewChatModal.css`
+- `messenger-frontend/src/components/ChatWindow.tsx`
+- `messenger-frontend/src/components/ChatWindow.css`
 
 ---
 
