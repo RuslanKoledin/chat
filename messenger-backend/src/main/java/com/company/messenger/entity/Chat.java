@@ -32,7 +32,7 @@ public class Chat {
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
         name = "chat_members",
         joinColumns = @JoinColumn(name = "chat_id"),
